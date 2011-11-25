@@ -3,6 +3,10 @@
 
 int column;
 int columnCount;
+
+int row;
+int rowCount;
+
 int lastRow;
 
 int imgWidth = 64;
@@ -17,18 +21,20 @@ PImage curImg;
 
 void setup() {
   size(640, 480, P2D);
+  
   column = 0;
   columnCount = width / imgWidth;
-  int rowCount = height / imgHeight;
+  
+  row = 0;
+  rowCount = height / imgHeight;
+  
   lastRow = rowCount - 1;
   
   scoot = new int[lastRow*imgHeight * width];
   background(0);
   
   String data = dataPath("");
-  myFiles =  listFiles(data);
-  
-  
+  myFiles =  listFiles(data); 
 }
 
 
@@ -36,12 +42,14 @@ void draw() {
     if (curFileIndex == myFiles.length){
      curFileIndex=0;
     }
+    
     println(myFiles[curFileIndex].getName());
-      curImg = loadImage(myFiles[curFileIndex].getName());
-      curImg.resize(imgWidth, imgHeight);
+    curImg = loadImage(myFiles[curFileIndex].getName());
+    curImg.resize(imgWidth, imgHeight);
       
     set(curImg.width*column, curImg.height*lastRow, curImg);
     column++;
+    
     if (column == columnCount) {
       loadPixels();
         
